@@ -1,0 +1,68 @@
+<nav class="navbar navbar-light" style="background-color: #5cc934;">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="assets/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-top">
+            Reportes de ventas
+        </a>
+        <form class="d-flex" (ngSubmit)="logout()">
+            <button class="btn btn-outline-success" type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+</nav>
+<nav class="navbar navbar-light" style="background-color: white;">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+
+        </a>
+        <div class="d-flex">
+            <button type="button" class="btn btn-info" (click)="printDiv()">Imprimir</button>
+        </div>
+    </div>
+</nav>
+
+<div id="reportes">
+    <table style="margin:auto">
+        <tr>
+            <td style="vertical-align: top; margin-top: 10%;">
+                <div>
+                    <img src="assets/images/logo.png" alt="" width="300" height="300"><br>
+                </div>
+            </td>
+            <td style="width: 50rem;">
+                <div style="margin-top: 10%;" class="tableFixHead">
+                    <h2>Ventas realizadas</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>NIT</th>
+                                <th>Importe (Bs)</th>
+                                <th *ngIf="print">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of ventas">
+                                <td>{{item.idventa}}</td>
+                                <td>{{item.cliente}}</td>
+                                <td>{{getCurrentDate(item.creationTimeStamp)}}</td>
+                                <td>{{item.nit}}</td>
+                                <td>{{item.total}}</td>
+                                <td *ngIf="print">
+                                    <button type="button" class="btn btn-danger"
+                                        (click)="eliminar(item)">Eliminar</button>
+                                </td>                                
+                            </tr>
+                        </tbody>                    
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+            </td>
+        </tr>
+    </table>
+</div>

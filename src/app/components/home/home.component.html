@@ -1,0 +1,80 @@
+<nav class="navbar navbar-light" style="background-color: #5cc934;">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="assets/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-top">
+            Menú principal
+        </a>
+        <form class="d-flex" (ngSubmit)="logout()">
+            <button class="btn btn-outline-success" type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+</nav>
+<h2 style="text-align: center; padding-top: 5%;">Bienvenido {{userdata}}!</h2>
+
+<table style="margin:auto; margin-top: 5%;">
+    <tr>
+        <td>
+            <div class="card" style="width: 25rem; ">
+                <div class="card-body">
+                    <h1 class="card-title">VENTAS</h1>
+                    <p class="card-text"></p>
+                    <img src="assets/images/logo.png" alt="" class="img">
+                    <p></p>
+                    <form (ngSubmit)="goToVentas()">
+                        <button type="submit" class="btn btn-light">Realizar venta</button>
+                    </form>
+                </div>
+            </div>
+        </td>
+        <td>
+            <pre>            </pre>
+        </td>
+        <td>
+            <div class="card" style="width: 25rem; ">
+                <div class="card-body">
+                    <h1 class="card-title">INVENTARIO</h1>
+                    <p class="card-text"></p>
+                    <img src="assets/images/logo.png" alt="" class="img">
+                    <p></p>
+                    <form (ngSubmit)="goToInventarios()">
+                        <button type="submit" class="btn btn-light">Gestionar inventarios</button>
+                    </form>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <p></p>
+    </tr>
+    <tr>
+        <td>
+            <div class="card" style="width: 25rem; ">
+                <div class="card-body">
+                    <h1 class="card-title">REPORTES</h1>
+                    <p class="card-text"></p>
+                    <img src="assets/images/logo.png" alt="" class="img">
+                    <p></p>
+                    <form (ngSubmit)="goToReportes()">
+                        <button type="submit" class="btn btn-light">Ver reportes</button>
+                    </form>
+                </div>
+            </div>
+        </td>
+        <td>
+            <pre>            </pre>
+        </td>
+        <td>
+            <div *ngIf="adminValue" class="card" style="width: 25rem; ">
+                <div class="card-body">
+                    <h1 class="card-title">EMPLEADOS</h1>
+                    <p class="card-text"></p>
+                    <img src="assets/images/logo.png" alt="" class="img">
+                    <p></p>
+                    <form (ngSubmit)="goToEmpleados()">
+                        <button type="submit" class="btn btn-light">Gestionar empleados</button>
+                    </form>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

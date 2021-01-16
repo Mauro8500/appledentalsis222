@@ -1,0 +1,29 @@
+<div *ngIf="alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Intente de nuevo </strong> Usuario o contraseña incorrectos!
+  <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="card" style="width: 18rem; margin: auto; margin-top: 10%;">
+  <div class="card-body">
+    <h1 class="card-title">INICIAR SESIÓN</h1>
+    <p class="card-text">Ingrese sus credenciales</p>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" formControlName="username" class="form-control">
+      </div><br>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" class="form-control">
+      </div><br>
+
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Ingresar</button>
+      </div>
+
+    </form>
+  </div>
+</div>

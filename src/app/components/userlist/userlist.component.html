@@ -1,0 +1,118 @@
+<nav class="navbar navbar-light" style="background-color: #5cc934;">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="assets/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-top">
+            Gestión de empleados
+        </a>
+        <form class="d-flex" (ngSubmit)="logout()">
+            <button class="btn btn-outline-success" type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+</nav>
+
+<div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Éxito </strong> Usuario registrado!
+    <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div *ngIf="alert2" class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Éxito! </strong> Usuario eliminado
+    
+    <button (click)="closeAlert()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+
+<table *ngIf="!value" style="margin:auto">
+    <tr>
+        <td style="margin:auto">
+            <div>
+                <img src="assets/images/logo.png" alt="" width="300" height="300" ><br>
+            </div>
+        </td>
+        <td style="width: 50rem;">
+            <div style="margin-top: 10%;" class="tableFixHead">
+                <h2>Usuarios registrados</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>CI</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Edad</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of appusers">
+                            <td>{{item.id}}</td>
+                            <td>{{item.ci}}</td>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.apellido}}</td>
+                            <td>{{item.edad}}</td>
+                            <td>{{item.rol}}</td>
+                            <td>                
+                                <button type="button" class="btn btn-dark" (click)="editar(item)">Editar</button>
+                                <button type="button" class="btn btn-danger" (click)="eliminar(item)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+        </td>
+        <td style="text-align: center;">
+            <button type="button" class="btn btn-dark" (click)="agregar()">Agregar empleado</button>
+        </td>
+    </tr>
+</table>
+
+<div *ngIf="value">
+    <div class="registerForm">
+        <h2>Editar usuario</h2>
+        <form [formGroup]="appuserForm" (ngSubmit)="guardar()">
+            <div class="form-group">
+                <label>CI</label>
+                <input type="text" formControlName="ci" class="form-control">
+            </div><br>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" formControlName="nombre" class="form-control">
+            </div><br>
+            <div class="form-group">
+                <label>Apellido</label>
+                <input type="text" formControlName="apellido" class="form-control">
+            </div><br>
+            <div class="form-group">
+                <label>Edad</label>
+                <input type="number" formControlName="edad" class="form-control">
+            </div><br>
+            <div class="form-group">
+                <label>Rol</label>
+                <select name="rolPick" formControlName="rol" class="form-control">
+                    <option value="admin">Jefe</option>
+                    <option value="empleado">Empleado</option>
+                  </select>
+            </div><br>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="text" formControlName="password" class="form-control">
+            </div><br>
+    
+            <div class="d-flex">
+                <div class="p-2"><button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button> </div>
+                <div class="mr-auto p-2"><button type="submit" class="btn btn-success" [disabled]="appuserForm.invalid">Guardar</button></div>
+              </div>
+        </form>
+    </div>
+</div>
+

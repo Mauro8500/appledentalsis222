@@ -1,0 +1,60 @@
+<nav class="navbar navbar-light" style="background-color: #5cc934;">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="assets/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-top">
+            Gestión de inventarios
+        </a>
+        <form class="d-flex" (ngSubmit)="logout()">
+            <button class="btn btn-outline-success" type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+</nav>
+
+<table style="margin:auto">
+    <tr>
+        <td style="margin:auto">
+            <div>
+                <img src="assets/images/logo.png" alt="" width="300" height="300" ><br>
+            </div>
+        </td>
+        <td style="width: 50rem;">
+            <div style="margin-top: 10%;" class="tableFixHead">
+                <h2>Productos registrados</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio (Bs)</th>
+                            <th>Descripcion</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of products">
+                            <td>{{item.idProd}}</td>
+                            <td>{{item.nomProd}}</td>
+                            <td>{{item.cant}}</td>
+                            <td>{{item.precio}}</td>
+                            <td>{{item.descr}}</td>
+                            <td>                
+                                <button type="button" class="btn btn-dark" (click)="editar(item)">Editar</button>
+                                <button type="button" class="btn btn-danger" (click)="eliminar(item)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+        </td>
+        <td style="text-align: center;">
+            <button type="button" class="btn btn-dark" (click)="agregar()">Agregar producto</button>
+        </td>
+    </tr>
+</table>
+

@@ -1,0 +1,200 @@
+<nav class="navbar navbar-light" style="background-color: #5cc934;">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="assets/images/logo.png" alt="" width="30" height="24" class="d-inline-block align-top">
+            Venta de productos
+        </a>
+        <form class="d-flex" (ngSubmit)="logout()">
+            <button class="btn btn-outline-success" type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+</nav>
+
+<div *ngIf="pagado">
+    <div id="factura" style="margin-top: 10%; width: 40rem; margin: auto;" >
+        <h2>FACTURA </h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Producto</th>                                    
+                    <th>Precio c/u (Bs)</th>                    
+                    <th>Importe (Bs)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let selitem of selprods">
+                    <td>{{selitem.cant}}</td>                    
+                    <td>{{selitem.nomProd}}</td>
+                    <td>{{selitem.precio}}</td>
+                    <td>{{selitem.parcial}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                        NIT empresarial: 3323443
+                    </td>
+                </tr>
+                <tr>
+                    <td><h2>Total Factura: (Bs) {{tot}}</h2></td>
+                </tr>
+                <tr>
+                    <td>
+                        Fecha: {{dateTime}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Señores:  {{facturaForm.value.cliente}}</td>
+                </tr>
+                <tr>
+                    <td>NIT:  {{facturaForm.value.nit}}</td>
+                </tr>
+            </thead>
+        </table>
+        
+    </div>
+
+    <div class="d-flex" style="text-align: center; width: 40rem; margin: auto;">
+        <div class="mr-auto p-2"><button type="button" class="btn btn-info" (click)="printDiv()">Imprimir</button></div>
+        <div class="p-2"></div>
+        <div class="p-2"> <button type="button" class="btn btn-secondary" (click)="finalizar()">Finalizar</button></div>
+      </div>
+        
+</div>
+
+<table *ngIf="show2">
+    <tr>
+        <td style="width: 40rem; padding-left: 10%;">
+            <div style="margin-top: 10%;" class="tableFixHead">
+                <h2>Carrito </h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio c/u (Bs)</th>
+                            <th>Total Parcial (Bs)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let selitem of selprods">
+                            <td>{{selitem.idProd}}</td>
+                            <td>{{selitem.nomProd}}</td>
+                            <td>{{selitem.cant}}</td>
+                            <td>{{selitem.precio}}</td>
+                            <td>{{selitem.parcial}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+        <td>
+            <div>
+                <label><br></label>
+            </div>
+        </td>
+        <td style="margin-top: 10%;" >
+            <h2>Datos de factura</h2>
+            <form [formGroup]="facturaForm" (ngSubmit)="pagar()">
+            
+                <div class="form-group">
+                    <label>Señores</label>
+                    <input type="text" formControlName="cliente" class="form-control">
+                </div><br>
+                <div class="form-group">
+                    <label>NIT o CI</label>
+                    <input type="text" formControlName="nit" class="form-control">
+                </div><br>
+                <button type="submit" class="btn btn-dark">Pagar</button>
+            </form>
+
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <button type="button" class="btn btn-secondary" (click)="back()">Volver</button>
+        </td>
+        <td>
+            <a>TOTAL A PAGAR = Bs {{tot}}</a><br>
+        </td>
+        <td style="text-align: center;">
+
+        </td>
+    </tr>
+</table>
+
+
+<table *ngIf="show" style="margin:auto">
+    <tr>
+        <td style="width: 50rem;">
+            <div style="margin-top: 10%;" class="tableFixHead">
+                <h2>Productos disponibles</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Precio c/u(Bs)</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of products">
+                            <td>{{item.idProd}}</td>
+                            <td>{{item.nomProd}}</td>
+                            <td>{{item.precio}}</td>
+                            <td>{{item.descr}}</td>
+                            <td>
+                                <form [formGroup]="itemForm" (ngSubmit)="seleccionar()">
+                                    <input type="number" formControlName="cant" class="form-control" min=1
+                                        max={{item.cant}} style="max-width: 80px;">
+                                    <button type="submit" class="btn btn-dark" (click)="agregar(item)">Agregar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+        <td style="width: 50rem; padding-left: 10%;">
+            <div style="margin-top: 10%;" class="tableFixHead">
+                <h2>Carrito </h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let selitem of selprods">
+                            <td>{{selitem.idProd}}</td>
+                            <td>{{selitem.nomProd}}</td>
+                            <td>{{selitem.cant}}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger" (click)="eliminar(selitem)">Quitar</button>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <button type="button" class="btn btn-secondary" (click)="volver()">Volver</button>
+        </td>
+        <td style="text-align: center;">
+            <button type="button" class="btn btn-dark" (click)="siguiente()">Siguiente</button>
+        </td>
+    </tr>
+</table>

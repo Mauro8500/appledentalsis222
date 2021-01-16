@@ -1,0 +1,23 @@
+mat-card{
+  max-width: 600px;
+  margin: 2em auto;
+  text-align: center;
+  max-height: 600px;
+}
+.full-width{
+  width: 80%;
+}
+.form-field {
+    width: 200px;
+  }
+
+  .card {
+    max-width: 400px;
+    background-color: #5cc934;
+  }
+  
+  .header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  
